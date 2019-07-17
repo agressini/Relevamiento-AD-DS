@@ -7,9 +7,6 @@ get-ADForest |out-file Forest.txt
 #Obtener info del dominio
 get-ADDomain |out-file Domain.txt
 
-#Listar DCs
-get-ADDomainController |out-file DCs.txt
-
 #Contar usuarios
 Get-ADUser -Filter * | Measure-Object | out-file Cantidad_user.txt
 
