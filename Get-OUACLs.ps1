@@ -13,10 +13,10 @@ $OUs = Get-ADOrganizationalUnit -Filter *| Select-Object -ExpandProperty Disting
 ForEach ($OU in $OUs) { 
 $report += Get-Acl -Path "AD:\$OU" | 
 Select-Object -ExpandProperty Access | 
-Select-Object @{name='organizationalUnit';expression={$OU}}, ` 
+Select-Object @{name='organizationalUnit';expression={$OU}}, `
 @{name='objectTypeName';expression={if ($_.objectType.ToString() -eq '00000000-0000-0000-0000-000000000000') {'All'} Else {$schemaIDGUID.Item($_.objectType)}}}, ` 
-@{name='inheritedObjectTypeName';expression={$schemaIDGUID.Item($_.inheritedObjectType)}}, ` 
+@{name='inheritedObjectTypeName';expression={$schemaIDGUID.Item($_.inheritedObjectType)}}, `
 * 
 }
 # Export report out to a CSV file for analysis in Excel. 
-$report | Export-Csv -Path "C:\data\OU_Permissions.csv" -NoTypeInformation
+$report | Export-Csv -Path $Env:USERPROFILE\Desktop\OU_permissions.csv -NoTypeInformation -Delimiter ";"
