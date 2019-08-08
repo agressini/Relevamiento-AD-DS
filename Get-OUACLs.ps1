@@ -7,7 +7,7 @@ Get-ADObject -SearchBase "CN=Extended-Rights,$((Get-ADRootDSE).configurationNami
 ForEach-Object {$schemaIDGUID.add([System.GUID]$_.rightsGUID,$_.name)} 
 $ErrorActionPreference = 'Continue'
 # Get OU.
-$OUs = Get-ADOrganizationalUnit -Filter 'Name -like "Production"'| Select-Object -ExpandProperty DistinguishedName
+$OUs = Get-ADOrganizationalUnit -Filter *| Select-Object -ExpandProperty DistinguishedName
 # retrieve OU permissions. 
 # Add report columns to contain the OU path and string names of the ObjectTypes. 
 ForEach ($OU in $OUs) { 
